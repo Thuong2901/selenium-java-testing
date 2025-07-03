@@ -1,11 +1,14 @@
 package JavaBasic;
 
+import org.testng.annotations.Test;
+
 import java.util.Scanner;
 
 public class Baitap_Topic_07 {
     public static void main(String[] args){
         //Bai 1
-        /*int a=9;
+        //@Test
+        int a=9;
         switch (a){
             case 1:
                 System.out.println("One");
@@ -39,7 +42,7 @@ public class Baitap_Topic_07 {
                 break;
             default:
                 System.out.println();
-        }*/
+        }
 
 
         //Bai 2
