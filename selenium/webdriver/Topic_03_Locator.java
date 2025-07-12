@@ -51,14 +51,14 @@ public class Topic_03_Locator {
 
     }
     @Test
-    public void TC06_partialLinkText(){
+    public void TC06_PartialLinkText(){
         driver.findElement(By.partialLinkText("ACCOUNT"));
         driver.findElement(By.partialLinkText("AND RETURNS"));
         driver.findElement(By.partialLinkText("SERVICE"));
 
     }
     @Test
-    public void TC07_css(){
+    public void TC07_Css(){
     // CSS với ID
         driver.findElement(By.cssSelector("input[id='email']"));
         driver.findElement(By.cssSelector("#email"));
@@ -82,7 +82,7 @@ public class Topic_03_Locator {
         driver.findElement(By.cssSelector("a[href*='/customer/account/']"));
     }
     @Test
-    public void TC08_xpath(){
+    public void TC08_Xpath(){
         //Xpath với id
         driver.findElement(By.xpath("//input[@id='email']"));
 
@@ -104,7 +104,7 @@ public class Topic_03_Locator {
     }
     @AfterClass
     public void afterclass(){
-
+        driver.quit();
     }
 }
 
