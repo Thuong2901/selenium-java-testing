@@ -8,7 +8,7 @@ import org.testng.annotations.Test;
 
 import java.time.Duration;
 
-public class Topic_06 {
+public class Topic_06_Browser_Element {
     WebDriver driver;
 
     @BeforeClass
