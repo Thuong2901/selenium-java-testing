@@ -4,14 +4,17 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.Assert;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-public class Topic_06_Browser {
+public class Topic_06_Exe_Browser {
     WebDriver driver;
 
     @BeforeClass
-    public void beforeClass(){driver=new FirefoxDriver();}
+    public void beforeClass(){
+        driver=new FirefoxDriver();
+    }
 
     @Test
     public void TC01_Url(){
@@ -68,5 +71,10 @@ public class Topic_06_Browser {
 
         driver.findElement(By.cssSelector("a[title='Create an Account']")).click();
         Assert.assertTrue(driver.getPageSource().contains("Create an Account"));
+    }
+
+    @AfterClass
+    public void afterclass(){
+        driver.quit();
     }
 }
