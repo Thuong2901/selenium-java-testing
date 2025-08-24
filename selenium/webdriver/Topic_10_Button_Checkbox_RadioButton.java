@@ -61,7 +61,11 @@ public class Topic_10_Button_Checkbox_RadioButton {
         By leatherTrimCheckbox = By.xpath("//label[text()='Leather trim']/preceding-sibling::span/input");
         By TowbarCheckbox = By.xpath("//label[text()='Towbar preparation']/preceding-sibling::span/input");
 
-        driver.findElement(dualZoneCheckbox).click();
+        //click chọn
+        if (!driver.findElement(dualZoneCheckbox).isSelected()){
+            ((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView(true);",driver.findElement(By.id("demo-runner")));
+            driver.findElement(dualZoneCheckbox).click();
+        }
         //kiểm tra
         Assert.assertTrue(driver.findElement(dualZoneCheckbox).isSelected());
 
@@ -78,6 +82,8 @@ public class Topic_10_Button_Checkbox_RadioButton {
         driver.get("https://demos.telerik.com/kendo-ui/radiobutton/index");
         By petrol = By.xpath("//label[text()='2.0 Petrol, 147kW']/preceding-sibling::span/input");
         driver.findElement(petrol).click();
+
+        //click bỏ chọn
         if (!driver.findElement(petrol).isSelected()) {
             driver.findElement(petrol).click();
         }
