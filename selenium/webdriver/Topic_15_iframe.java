@@ -1,9 +1,6 @@
 package webdriver;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.SearchContext;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
@@ -22,6 +19,17 @@ public class Topic_15_iframe {
     @Test
     public void TC01_WordPress(){
         driver.get("https://toidicodedao.com/");
+
+        // switch qua iframe/frame
+        driver.switchTo().frame(driver.findElement(By.cssSelector("iframe[title*='Facebook Social Plugin']")));
+
+        Assert.assertEquals(driver.findElement(By.xpath("//a[text()='Tôi đi code dạo']/parent::div/following-sibling::div")).getText(), "395K followers");
+
+        // Quay lại trang chứa iframe
+        driver.switchTo().defaultContent();
+
+        driver.findElement(By.cssSelector("div#content-sidebar input[class='search-field']")).sendKeys("puppeteer");
+        driver.findElement(By.cssSelector("div#content-sidebar input[class='search-field']")).sendKeys(Keys.ENTER);
 
     }
 
