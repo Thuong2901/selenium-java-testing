@@ -1,10 +1,13 @@
 package webdriver;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
@@ -13,6 +16,7 @@ import org.testng.annotations.Test;
 
 import java.time.Duration;
 import java.util.Date;
+import java.util.NoSuchElementException;
 
 public class Topic_23_Wait_PV_Explicit {
     WebDriver driver;
@@ -72,14 +76,45 @@ public class Topic_23_Wait_PV_Explicit {
         explicitWait.until(ExpectedConditions.elementToBeClickable(By.xpath("//td/a[text()='6']"))).click();
 
         //Wait cho loading icon biến mất
-        Assert.assertTrue(explicitWait.until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector(
-                "div:not([style='display:none;'])>div.raDiv"))));
+        /*Assert.assertTrue(explicitWait.until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector(
+                "div:not([style='display:none;'])>div.raDiv"))));*/
+        Assert.assertTrue(waitLoadingIconInvisible("div:not([style='display:none;'])>div.raDiv"));
 
         //Wait cho text được cập nhật lên trang
         Assert.assertTrue(explicitWait.until(ExpectedConditions.textToBe(By.cssSelector("span#ctl00_ContentPlaceholder1_Label1"),
                 "Saturday, September 6, 2025")));
+        Assert.assertTrue(waitTextChange("span#ctl00_ContentPlaceholder1_Label1","Saturday, September 6, 2025"));
 
 
+    }
+
+    private boolean waitLoadingIconInvisible(String cssLocator){
+        FluentWait<WebDriver> fluentWait = new FluentWait<>(driver);
+        fluentWait.withTimeout(Duration.ofSeconds(15))
+                .pollingEvery(Duration.ofMillis(100))
+                .ignoring(NoSuchElementException.class)
+                .ignoring(StaleElementReferenceException.class);
+        return fluentWait.until(new ExpectedCondition<Boolean>() {
+            @Override
+            public Boolean apply(WebDriver driver) {
+                return driver.findElements(By.cssSelector(cssLocator)).isEmpty();
+            }
+        });
+    }
+
+    private boolean waitTextChange(String cssLocator ,String textExpected){
+        FluentWait<WebDriver> fluentWait = new FluentWait<>(driver);
+        fluentWait.withTimeout(Duration.ofSeconds(15))
+                .pollingEvery(Duration.ofMillis(100))
+                .ignoring(NoSuchElementException.class)
+                .ignoring(StaleElementReferenceException.class);
+
+        return fluentWait.until(new ExpectedCondition<Boolean>() {
+            @Override
+            public Boolean apply(WebDriver driver) {
+                return driver.findElement(By.cssSelector(cssLocator)).getText().equals(textExpected);
+            }
+        });
     }
 
     @Test
