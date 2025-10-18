@@ -6,9 +6,19 @@
 
     <parameter name="platformName" value="Windows"></parameter>
 
-    <listeners>
-        <listener class-name="Listeners.ReportNGListener"></listener>
-    </listeners>
+    <test name="Run for Chorme">
+      <parameter name="browser" value="Chrome"></parameter>
+        <classes>
+        <class name = "basic.Topic_12_Invocation"></class>
+        </classes>
+    </test>
+
+<!--   <test name="Run for EDGE">-->
+<!--        <parameter name="browser" value="Edge"></parameter>-->
+<!--        <classes>-->
+<!--            <class name = "basic.Topic_12_Invocation"></class>-->
+<!--        </classes>-->
+<!--    </test>-->
 
     <test name="Run for FIREFOX">
         <parameter name="browser" value="FireFox"></parameter>

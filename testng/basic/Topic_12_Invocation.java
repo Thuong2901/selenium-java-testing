@@ -9,10 +9,7 @@ import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.Color;
 import org.testng.Assert;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Parameters;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -20,6 +17,7 @@ import java.io.IOException;
 import java.time.Duration;
 import java.util.Properties;
 import java.util.Random;
+
 
 public class Topic_12_Invocation {
     WebDriver driver;
@@ -112,5 +110,9 @@ public class Topic_12_Invocation {
     public void afterClass() throws IOException {
         outputStrem.flush();
         driver.quit();
+    }
+
+    public WebDriver getDriver() {
+        return driver;
     }
 }
